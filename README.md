@@ -1,0 +1,1 @@
+Developed an Employee Management System using Python Django with database connectivity, CRUD operations, employee record management, and image uploading functionality for storing employee profile photos efficiently.
