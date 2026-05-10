@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #eef2f3, #d9e2ec);
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+        }
+        .btn-success {
+            border-radius: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card p-4">
+                <h3 class="text-center mb-4 text-primary">Employee Update_Data Form</h3>
+                <!-- {% if messages %}
+                    <h4 style="color: green;">{{messages}}</h4>
+                {% endif %} -->
+                {% if key2 %}
+                <form method="post" enctype="multipart/form-data" action="{% url 'updateinfo' pk=key2.id %}">
+                    {% csrf_token %}
+
+                    <!-- Employee Name -->
+                    <div class="mb-3">
+                        <label class="form-label">Employee Name</label>
+                        <input type="text" name="emp_name" class="form-control" placeholder="Enter employee name" value="{{key2.emp_name}}" required>
+                    </div>
+
+                    <!-- Gender (Radio Button) -->
+                    <div class="mb-3">
+                        <label class="form-label d-block">Gender</label>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" 
+                                {% if key2.gender == "Male" %}checked
+                                {% endif %}>
+                            <label class="form-check-label" for="genderMale">Male</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female"
+                                {% if key2.gender == "Female" %}checked
+                                {% endif %}>
+                            <label class="form-check-label" for="genderFemale">Female</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Other"
+                                {% if key2.gender == "Other" %}checked
+                                {% endif %}>
+                            <label class="form-check-label" for="genderOther">Other</label>
+                        </div>
+                    </div>
+
+
+                    <!-- Date of Birth -->
+                    <div class="mb-3">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" name="dob" class="form-control" value="{{ key2.dob|date:'Y-m-d' }}" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{key2.email}}" placeholder="example@gmail.com" required>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea name="address" class="form-control" rows="2" placeholder="Enter address" required>{{key2.address}}</textarea>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="mb-3">
+                        <label class="form-label">Contact</label>
+                        <input type="text" name="contact" class="form-control" placeholder="Enter contact number" value="{{key2.contact}}" required>
+                    </div>
+
+                    <!-- Department -->
+                <div class="mb-3">
+                    <label class="form-label">Department</label>
+                    <select name="emp_dept" class="form-select" required>
+                        <option value="">Select Department</option>
+            <option value="HR" {% if key2.emp_dept == "HR" %}selected{% endif %}>HR</option>
+                        <option value="IT" {% if key2.emp_dept == "IT" %}selected{% endif %}>IT</option>
+                        <option value="Finance" {% if key2.emp_dept == "Finance" %}selected{% endif %}>Finance</option>
+                        <option value="Marketing" {% if key2.emp_dept == "Marketing" %}selected{% endif %}>Marketing</option>
+                    </select>
+                </div>
+
+
+
+
+
+                    <!-- Salary -->
+                    <div class="mb-3">
+                        <label class="form-label">Salary</label>
+                        <input type="number" name="salary" class="form-control" placeholder="Enter salary" value="{{key2.salary}}" required>
+                    </div>
+
+                    <!-- Photo -->
+                    <div class="mb-4">
+                        <label class="form-label">Employee Photo</label><br>
+                        {% if key2.photo %}
+                            <img src="{{ key2.photo.url }}" alt="Employee Photo" width="50px" height="50px" style="margin-bottom: 10px; border-radius: 5px;">
+                        {% endif %}
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success text-white">
+                            Update_Data
+                        </button>
+                    </div>
+
+                </form>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
